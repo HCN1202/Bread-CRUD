@@ -11,6 +11,20 @@ router.get('/',(req, res)=>{
 //GET speific bread
 router.get('/:index', (req, res) =>{
     const { index } = req.params
-    res.send(Bread[index])
+    res.render('show', {
+        bread: Bread[index]
+    })
+    //send(Bread[index])
 })
+
+router.post('/', (req,res) => {
+    if(req.body.hasGluten === 'on'){
+        req.body.hasGluten = true
+    } else {
+        req.body.hasGluten =false
+    }
+    Bread.push(req.body)
+    res.send(Bread)
+})
+
 module.exports = router
